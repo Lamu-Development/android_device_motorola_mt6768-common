@@ -1,0 +1,68 @@
+#
+# SPDX-FileCopyrightText: The LineageOS Project
+# SPDX-License-Identifier: Apache-2.0
+#
+# System-scoped stock properties imported from VVTA35.51-158 /system/build.prop.
+# Note: properties with `vendor.*`, `persist.vendor.*` or `ro.vendor.*`
+# belong to vendor.prop (the build rejects vendor properties in system partition).
+
+# SurfaceFlinger — stock system/build.prop
+# treat_170m_as_sRGB: render display in sRGB
+# default_touch_timer_ms: overrides ro.surface_flinger.set_touch_timer_ms
+# predict_hwc_composition_strategy: disable HWC composition prediction
+debug.sf.treat_170m_as_sRGB=1
+debug.sf.default_touch_timer_ms=4000
+debug.sf.predict_hwc_composition_strategy=0
+debug.sf.enable_transaction_tracing=false
+debug.sf.late.sf.duration=27600000
+debug.sf.late.app.duration=20000000
+debug.sf.early.sf.duration=27600000
+debug.sf.early.app.duration=20000000
+debug.sf.earlyGl.sf.duration=27600000
+debug.sf.earlyGl.app.duration=20000000
+debug.sf.hwc.min.duration=23000000
+debug.sf.enable_gl_backpressure=0
+
+# MediaTek / Tinno performance boost & window response
+ro.tn.performance=1
+ro.mtk_perf_simple_start_win=1
+ro.mtk_perf_fast_start_win=1
+ro.mtk_perf_response_time=1
+
+# MediaTek IPO (screen-off suspend) — read by power HAL
+sys.ipo.disable=1
+sys.ipo.pwrdncap=2
+
+# ART, Dexopt and memory tuning (from stock /system/build.prop)
+dalvik.vm.appimageformat=lz4
+dalvik.vm.enable_pr_dexopt=true
+dalvik.vm.dexopt.thermal-cutoff=2
+dalvik.vm.dex2oat-resolve-startup-strings=true
+dalvik.vm.dex2oat-max-image-block-size=524288
+dalvik.vm.image-dex2oat-Xms=64m
+dalvik.vm.image-dex2oat-Xmx=64m
+dalvik.vm.dex2oat-Xms=64m
+dalvik.vm.dex2oat-Xmx=512m
+dalvik.vm.madvise.vdexfile.size=104857600
+dalvik.vm.madvise.odexfile.size=104857600
+dalvik.vm.madvise.artfile.size=4294967295
+dalvik.vm.usap_pool_enabled=false
+ro.config.per_app_memcg=false
+ro.property_service.async_persist_writes=true
+media.stagefright.thumbnail.prefer_hw_codecs=true
+persist.bluetooth.lhdc_codec.enabled=true
+persist.sys.duraspeed.cpu_trigger=true
+persist.sys.duraspeed.screenoff_trigger=true
+persist.sys.zram_wb_enabled=true
+persist.sys.zram_wb_ai_enabled=true
+persist.sys.fuse.passthrough.enable=true
+persist.system.powerhal.applist_enable=1
+
+# Wi-Fi interface names read by the framework
+wifi.interface=wlan0
+wifi.direct.interface=p2p0
+wifi.tethering.interface=ap0
+ro.wifi.channels=
+
+# Restrict perf_event to root (stock default)
+security.perf_harden=1

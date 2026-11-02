@@ -1,0 +1,19 @@
+# Complementary USB controller init for MediaTek MT6768.
+#
+# Upstream MediaTek init.mt6768.usb.rc does not set `sys.usb.controller`.
+# Without it, AOSP init.usb.rc fails to bind the UDC (/config/usb_gadget/g1/UDC),
+# preventing USB enumeration (no adb, MTP, or fastboot).
+# Also defines the Motorola USB VID (0x22B8) instead of generic MediaTek (0x0E8D).
+#
+# Named uniquely to avoid namespace collisions with prebuilt etc targets in
+# hardware/mediatek. Loaded before generic init via alphabetical sorting in
+# /vendor/etc/init/hw.
+
+on early-init
+    write /sys/module/musb_hdrc/parameters/kernel_init_done 1
+
+on init
+    setprop sys.usb.controller "musb-hdrc"
+
+on post-fs
+    setprop vendor.usb.vid "0x22B8"

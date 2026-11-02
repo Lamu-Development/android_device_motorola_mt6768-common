@@ -1,0 +1,99 @@
+#
+# SPDX-FileCopyrightText: The LineageOS Project
+# SPDX-License-Identifier: Apache-2.0
+#
+# Vendor properties imported from VVTA35.51-158 /vendor/build.prop and /system/build.prop.
+# Kept in this dedicated file to cleanly separate stock vendor overrides from tree properties.
+#
+# Consumer audit note:
+# Properties verified with active consumers in vendor binaries/HALs:
+#   RIL: persist.vendor.radio.*, ro.vendor.num_md_protocol, ro.vendor.mediatek.platform,
+#        ro.vendor.mtk_config_max_dram_size, ro.vendor.mtk_thin_md_telephony_support_mode
+#   Camera: ro.vendor.smvr.p2batch.*
+# Other properties remain for feature-flag completeness and stock behavior parity.
+
+# MediaTek feature flags read by HALs (camera, video, Wi-Fi, codecs)
+ro.vendor.mtk_audio_tuning_tool_ver=V2.2
+ro.vendor.mtk_blulight_def_support=1
+ro.vendor.mtk_camera_app_version=3
+ro.vendor.mtk_config_max_dram_size=0x800000000
+ro.vendor.mtk_emmc_support=1
+ro.vendor.mtk_f2fs_enable=1
+ro.vendor.mtk_fast_charging_support=1
+ro.vendor.mtk_flv_playback_support=1
+ro.vendor.mtk_mvpu_security_support=0
+ro.vendor.mtk_mvpu_support=0
+ro.vendor.mtk_omacp_support=1
+ro.vendor.mtk_prefer_64bit_proc=1
+ro.vendor.mtk_slow_motion_support=1
+ro.vendor.mtk_thermal_2_0=0
+ro.vendor.mtk_thin_md_telephony_support_mode=0
+ro.vendor.mtk_video_hevc_enc_support=1
+ro.vendor.mtk_wfd_support=1
+ro.vendor.mtk_zsdhdr_support=1
+ro.vendor.vt_hevc_support=1
+ro.vendor.wfd.dummy.enable=0
+ro.vendor.wfd.iframesize.level=0
+ro.mediatek.wlan.p2p=1
+ro.mediatek.wlan.wsc=1
+ro.vendor.num_md_protocol=2
+ro.vendor.pref_scale_enable_cfg=1
+ro.bluetooth.a2dp_offload.supported=true
+vendor.bluetooth.lhdc_codec.supported=true
+
+# Display and performance — SF, SkiaGL, Mali Vulkan, Duraspeed, LMK
+debug.renderengine.backend=skiagl
+ro.hardware.vulkan=mali
+ro.lmk.downgrade_pressure=60
+persist.adb.nonblocking_ffs=1
+vendor.debug.sf.cpupolicy=0
+vendor.debug.sf.cpupolicy.base_min_bl=350
+vendor.debug.sf.cpupolicy.bl_mask=0xc0
+vendor.debug.sf.cpupolicy.hw_comp_suspend=1
+vendor.debug.sf.cpupolicy.hw_hfr_suspend=1
+vendor.debug.sf.cpupolicy.ll_mask=0x3f
+vendor.debug.sf.cpupolicy.llbl_mask=0xff
+vendor.debug.sf.cpupolicy.max_correct_offset=450
+vendor.debug.sf.cpupolicy.min_90=80
+vendor.debug.sf.cpupolicy.min_correct_offset=-50
+vendor.debug.sf.cpupolicy.no_xgf=1
+vendor.debug.sf.cpupolicy.sf_cpu_thres=476
+vendor.debug.sf.cpupolicy.upbound_uclamp_max_ll=431
+vendor.debug.sf.cpupolicy.upbound_uclamp_min=532
+vendor.boostfwk.version=2
+vendor.boostfwk.scroll.policy.mode=1
+vendor.boostfwk.scroll.interrupt.touchboost=1
+persist.vendor.duraspeed.support=1
+persist.vendor.duraspeed.app.on=1
+persist.vendor.duraspeed.lowmemory.enable=1
+vendor.mtk_thumbnail_optimization=true
+ro.vendor.smvr.p2batch.hd=4
+ro.vendor.smvr.p2batch.vga=8
+ro.vendor.connsys.dedicated.log=1
+ro.vendor.connsys.dedicated.log.port=bt,wifi,gps,mcu
+vendor.af.dynamic.sleeptime.enable=true
+vendor.af.pausewait.enable=false
+vendor.af.threshold.src_and_effect_count=5
+
+# RIL — fast dormancy and per-SIM RAT
+persist.vendor.radio.fd.counter=150
+persist.vendor.radio.fd.off.counter=50
+persist.vendor.radio.fd.off.r8.counter=50
+persist.vendor.radio.fd.r8.counter=150
+persist.vendor.radio.mtk_ps2_rat=L/W/G
+persist.vendor.radio.mtk_ps3_rat=G
+persist.vendor.mdlog.flush_log_ratio=0
+persist.vendor.mdrsra_v3_support=1
+persist.vendor.mtk_rtt_support=1
+persist.vendor.pms_removable=1
+persist.vendor.vzw_device_type=0
+persist.vendor.wfc.sys_wfc_support=1
+
+# Stock build identity
+ro.mediatek.version.branch=alps-mp-v0.mssi1
+ro.mediatek.version.build.branch=
+ro.mediatek.version.release=alps-mp-v0.mp1.rc-V2_tinno.nj.v0mp1rc.k6991v1.64_P54
+ro.vendor.mediatek.platform=MT6768
+ro.vendor.mediatek.version.branch=alps-mp-v0.mp1
+ro.vendor.mediatek.version.release=alps-mp-v0.mp1.rc-V2_tinno.nj.v0mp1rc.k6991v1.64_P54
+ro.vendor.tcustom.build.version=VVTAS35.51-158-2

@@ -47,3 +47,10 @@ persist.fsck.disable_linear_lookup=on
 
 # RKPD
 remote_provisioning.hostname=remoteprovisioning.googleapis.com
+
+# WindowManager & UX (stock product/etc/build.prop)
+persist.wm.extensions.enabled=true
+ro.support_one_handed_mode=true
+
+# ART / Garbage Collection (stock product/etc/build.prop)
+ro.dalvik.vm.enable_uffd_gc=true

@@ -98,3 +98,23 @@ sh_binary {
     src: "init.insmod.sh",
     vendor: true,
 }
+
+// Complement upstream MediaTek init.mt6768.usb.rc: set sys.usb.controller and
+// Motorola VID. Without this, AOSP init.usb.rc does not bind UDC and USB gadget
+// never enumerates (no adb or MTP).
+// Named uniquely to avoid collision with hardware/mediatek prebuilt_etc.
+prebuilt_etc {
+    name: "init.usb.controller.moto.rc",
+    src: "init.usb.controller.moto.rc",
+    sub_dir: "init/hw",
+    vendor: true,
+}
+
+// SKU gating for secure_element: on non-NFC SKUs, MediaTek HAL crashes with
+// status=-3 (no eSE present) and bootloops. See init/init.lamu.nfc.rc.
+prebuilt_etc {
+    name: "init.lamu.nfc.rc",
+    src: "init.lamu.nfc.rc",
+    sub_dir: "init/hw",
+    vendor: true,
+}

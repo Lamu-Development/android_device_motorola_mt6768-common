@@ -1,0 +1,6 @@
+# Reading default_prop violates system/sepolicy neverallow rules.
+# Resolve camerahalserver property access via vendor_default_prop context:
+get_prop(mtk_hal_camera, vendor_default_prop)
+
+# AIDL sensor service access for ISensorManager/default.
+allow mtk_hal_camera fwk_sensor_service:service_manager find;

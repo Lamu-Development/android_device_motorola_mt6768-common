@@ -1,0 +1,7 @@
+# Allow shell to read diagnostic properties in enforcing mode
+allow shell audio_config_prop:file read;
+allow shell keyguard_config_prop:file read;
+allow shell vendor_mtk_usb_prop:file read;
+allow shell vendor_mtk_backlight_ro_prop:file read;
+allow shell drm_service_config_prop:file read;
+allow shell cpu_variant_prop:file read;

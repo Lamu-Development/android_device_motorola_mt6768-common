@@ -29,8 +29,15 @@ TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-2a-dotprod
 TARGET_CPU_ABI := arm64-v8a
 TARGET_CPU_ABI2 :=
-TARGET_CPU_VARIANT := generic
+TARGET_CPU_VARIANT := cortex-a55
 TARGET_CPU_VARIANT_RUNTIME := cortex-a75
+
+# Board API Level (stock: ro.board.first_api_level=30, ro.board.api_level=202404 for MediaTek VINTF)
+BOARD_SHIPPING_API_LEVEL := 202404
+BOARD_FIRST_API_LEVEL := 30
+
+# Dexpreopt
+WITH_DEXPREOPT_DEBUG_INFO := false
 
 # Boot Image
 BOARD_KERNEL_BASE              := 0x40078000
@@ -61,7 +68,10 @@ BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 BOARD_MKBOOTIMG_INIT_ARGS += --header_version $(BOARD_INIT_BOOT_HEADER_VERSION)
 
 BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2
+BOARD_KERNEL_CMDLINE += video=HDMI-A-1:1280x800@60
 BOARD_KERNEL_CMDLINE += androidboot.serialconsole=0
+# Export ro.boot.perf_state=1 via init cmdline parser (avoids vendor_init bootloader_prop neverallow)
+BOARD_KERNEL_CMDLINE += androidboot.perf_state=1
 
 # Bootloader
 BOARD_VENDOR := motorola
@@ -105,6 +115,16 @@ BOARD_MOTOROLA_DYNAMIC_PARTITIONS_PARTITION_LIST := odm odm_dlkm product system 
 BOARD_MOTOROLA_DYNAMIC_PARTITIONS_SIZE :=  $(shell expr $(BOARD_SUPER_PARTITION_SIZE) - 4194304) # (BOARD_SUPER_PARTITION_SIZE - "reasonable overhead of 4 MiB")
 BOARD_SUPER_PARTITION_GROUPS := motorola_dynamic_partitions
 
+# system, system_ext and product are intentionally kept on ext4. Recovery installers
+# (MindTheGapps, microG installer) remount these three in rw to install packages.
+# erofs is read-only at the filesystem level, causing `mount -o rw` to fail.
+# /system must also remain writable for addon.d survival across OTA updates.
+# Headroom for installation is reserved via BOARD_*IMAGE_PARTITION_RESERVED_SIZE.
+#
+# Read-only partitions at runtime use erofs matching stock (all dynamic partition
+# images from the VVTA35.51-158 dump use erofs with LZ4_0PADDING).
+BOARD_EROFS_COMPRESSOR := lz4hc,9
+
 BOARD_ODMIMAGE_FILE_SYSTEM_TYPE := erofs
 BOARD_ODM_DLKMIMAGE_FILE_SYSTEM_TYPE := erofs
 BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := ext4
@@ -113,6 +133,11 @@ BOARD_SYSTEM_DLKMIMAGE_FILE_SYSTEM_TYPE := erofs
 BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := erofs
 BOARD_VENDOR_DLKMIMAGE_FILE_SYSTEM_TYPE := erofs
+
+# Free space reserved for addons (GApps/microG) in writable ext4 dynamic partitions
+BOARD_SYSTEMIMAGE_PARTITION_RESERVED_SIZE := 16777216
+BOARD_SYSTEM_EXTIMAGE_PARTITION_RESERVED_SIZE := 50331648
+BOARD_PRODUCTIMAGE_PARTITION_RESERVED_SIZE := 1258291200
 
 TARGET_COPY_OUT_ODM := odm
 TARGET_COPY_OUT_ODM_DLKM := odm_dlkm
@@ -135,9 +160,15 @@ TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 TARGET_USERIMAGES_USE_F2FS := true
 
 # Properties
+# `stock-*.prop` files hold properties imported from Motorola stock firmware
+# (VVTA35.51-158), kept separate from tree-defined props to facilitate auditing.
+# TARGET_SYSTEM_PROP does not automatically default for the common tree
+# (the build wildcard only matches TARGET_DEVICE_DIR), so declare it explicitly.
+TARGET_SYSTEM_PROP += $(COMMON_PATH)/stock-system.prop
 TARGET_PRODUCT_PROP += $(COMMON_PATH)/product.prop
 TARGET_SYSTEM_EXT_PROP += $(COMMON_PATH)/system_ext.prop
 TARGET_VENDOR_PROP += $(COMMON_PATH)/vendor.prop
+TARGET_VENDOR_PROP += $(COMMON_PATH)/stock-vendor.prop
 
 # SEPolicy
 include device/mediatek/sepolicy_vndr/SEPolicy.mk
