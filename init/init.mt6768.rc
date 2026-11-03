@@ -61,6 +61,11 @@ on init
     write /dev/cpuset/restricted/cpus 0-3
     write /dev/cpuset/camera-daemon/cpus 0-7
 
+    # Pin VCU video decoder (v3avpud-64b + codec2 HAL) to BIG Cortex-A75 (CPU 6-7)
+    mkdir /dev/cpuset/video-decoder 0750 system system
+    write /dev/cpuset/video-decoder/cpus 6-7
+    write /dev/cpuset/video-decoder/mems 0
+
 on late-init
     write /proc/bootprof "INIT:late-init"
 # enable rcu_expedited
@@ -985,13 +990,14 @@ on property:sys.boot_completed=1
     write /sys/kernel/mm/damon/admin/kdamonds/0/contexts/0/schemes/0/access_pattern/sz/min 4096
     write /sys/kernel/mm/damon/admin/kdamonds/0/contexts/0/schemes/0/access_pattern/sz/max 67108864
     write /sys/kernel/mm/damon/admin/kdamonds/0/contexts/0/schemes/0/quotas/ms 40
-    write /sys/kernel/mm/damon/admin/kdamonds/0/contexts/0/schemes/0/quotas/sz 67108864
+    write /sys/kernel/mm/damon/admin/kdamonds/0/contexts/0/schemes/0/quotas/bytes 67108864
     write /sys/kernel/mm/damon/admin/kdamonds/0/contexts/0/schemes/0/quotas/reset_interval_ms 1000
     write /sys/kernel/mm/damon/admin/kdamonds/0/contexts/0/schemes/0/watermarks/metric free_mem_rate
     write /sys/kernel/mm/damon/admin/kdamonds/0/contexts/0/schemes/0/watermarks/interval_us 3000000
     write /sys/kernel/mm/damon/admin/kdamonds/0/contexts/0/schemes/0/watermarks/high 300
     write /sys/kernel/mm/damon/admin/kdamonds/0/contexts/0/schemes/0/watermarks/mid 200
     write /sys/kernel/mm/damon/admin/kdamonds/0/contexts/0/schemes/0/watermarks/low 100
+    write /sys/kernel/mm/damon/admin/kdamonds/0/state on
 
     # Reduce CPU logging overhead
     write /proc/sys/kernel/printk "3 3 3 3"
