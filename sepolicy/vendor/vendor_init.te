@@ -1,1 +1,27 @@
+# Fingerprint
 set_prop(vendor_init, vendor_fingerprint_prop)
+
+# Touch boost and scheduler / VM / GED / F2FS / MGLRU tuning in /proc and /sys
+allow vendor_init proc_touch_boost:file rw_file_perms;
+allow vendor_init proc:file rw_file_perms;
+allow vendor_init sysfs_ged:dir r_dir_perms;
+allow vendor_init sysfs_ged:file rw_file_perms;
+allow vendor_init sysfs_fs_f2fs:dir r_dir_perms;
+allow vendor_init sysfs_fs_f2fs:file rw_file_perms;
+allow vendor_init userdata_sysdev:lnk_file r_file_perms;
+allow vendor_init sysfs_lru_gen_enabled:file rw_file_perms;
+allow vendor_init sysfs_zram:dir r_dir_perms;
+allow vendor_init sysfs_zram:file rw_file_perms;
+allow vendor_init vendor_sysfs_vcodec:dir r_dir_perms;
+allow vendor_init vendor_sysfs_vcodec:file rw_file_perms;
+allow vendor_init cgroup:file rw_file_perms;
+allow vendor_init proc_sched:file rw_file_perms;
+allow vendor_init debugfs_tracing_instances:file create_file_perms;
+
+# Properties
+set_prop(vendor_init, vendor_mtk_default_prop)
+set_prop(vendor_init, vendor_mtk_wfc_serv_prop)
+
+# Regulatory label
+allow vendor_init elabel_data_file:dir { create_dir_perms relabelfrom relabelto };
+allow vendor_init elabel_data_file:file { create_file_perms relabelfrom relabelto setattr getattr };

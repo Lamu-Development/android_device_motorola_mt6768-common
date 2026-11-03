@@ -68,10 +68,13 @@ BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 BOARD_MKBOOTIMG_INIT_ARGS += --header_version $(BOARD_INIT_BOOT_HEADER_VERSION)
 
 BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2
-BOARD_KERNEL_CMDLINE += video=HDMI-A-1:1280x800@60
-BOARD_KERNEL_CMDLINE += androidboot.serialconsole=0
-# Export ro.boot.perf_state=1 via init cmdline parser (avoids vendor_init bootloader_prop neverallow)
-BOARD_KERNEL_CMDLINE += androidboot.perf_state=1
+
+# Bootconfig (Android 12+ GKI 6.6 / Android 16)
+# Keeps cmdline well below Little Kernel 1024-byte buffer limit
+BOARD_BOOTCONFIG += \
+    androidboot.serialconsole=0 \
+    androidboot.perf_state=1
+
 
 # Bootloader
 BOARD_VENDOR := motorola

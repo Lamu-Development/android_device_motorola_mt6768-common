@@ -34,12 +34,9 @@ ro.vendor.mtk_zsdhdr_support=1
 ro.vendor.vt_hevc_support=1
 ro.vendor.wfd.dummy.enable=0
 ro.vendor.wfd.iframesize.level=0
-ro.mediatek.wlan.p2p=1
-ro.mediatek.wlan.wsc=1
 ro.vendor.num_md_protocol=2
 ro.vendor.pref_scale_enable_cfg=1
 ro.bluetooth.a2dp_offload.supported=true
-vendor.bluetooth.lhdc_codec.supported=true
 
 # Display and performance — SF, SkiaGL, Mali Vulkan, Duraspeed, LMK
 debug.renderengine.backend=skiagl
@@ -82,17 +79,11 @@ persist.vendor.radio.fd.off.r8.counter=50
 persist.vendor.radio.fd.r8.counter=150
 persist.vendor.radio.mtk_ps2_rat=L/W/G
 persist.vendor.radio.mtk_ps3_rat=G
-persist.vendor.mdlog.flush_log_ratio=0
 persist.vendor.mdrsra_v3_support=1
-persist.vendor.mtk_rtt_support=1
 persist.vendor.pms_removable=1
-persist.vendor.vzw_device_type=0
 persist.vendor.wfc.sys_wfc_support=1
 
 # Stock build identity
-ro.mediatek.version.branch=alps-mp-v0.mssi1
-ro.mediatek.version.build.branch=
-ro.mediatek.version.release=alps-mp-v0.mp1.rc-V2_tinno.nj.v0mp1rc.k6991v1.64_P54
 ro.vendor.mediatek.platform=MT6768
 ro.vendor.mediatek.version.branch=alps-mp-v0.mp1
 ro.vendor.mediatek.version.release=alps-mp-v0.mp1.rc-V2_tinno.nj.v0mp1rc.k6991v1.64_P54

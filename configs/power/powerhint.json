@@ -4,7 +4,6 @@
       "Name": "MemFreq",
       "Path": "/sys/devices/platform/10012000.dvfsrc/mtk-dvfsrc-devfreq/devfreq/mtk-dvfsrc-devfreq/userspace/set_freq",
       "Values": [
-        "5500000000",
         "3600000000",
         "2400000000",
         "1534000000",
@@ -198,9 +197,10 @@
       "Name": "UclampTALatency",
       "Path": "/dev/cpuctl/top-app/cpu.uclamp.latency_sensitive",
       "Values": [
-        "0",
-        "1"
+        "1",
+        "0"
       ],
+      "DefaultIndex": 0,
       "ResetOnInit": true
     },
     {
@@ -277,7 +277,7 @@
       "PowerHint": "LAUNCH",
       "Node": "MemFreq",
       "Duration": 0,
-      "Value": "5500000000"
+      "Value": "3600000000"
     },
     {
       "PowerHint": "LAUNCH",
@@ -397,7 +397,7 @@
       "PowerHint": "EXPENSIVE_RENDERING",
       "Node": "MemFreq",
       "Duration": 0,
-      "Value": "5500000000"
+      "Value": "3600000000"
     }
   ]
 }

@@ -14,7 +14,8 @@ $(call inherit-product, frameworks/native/build/phone-xhdpi-4096-dalvik-heap.mk)
 
 # ART & Dexpreopt (parity with stock VVTA35.51-158: ro.dalvik.vm.enable_uffd_gc=true)
 PRODUCT_ENABLE_UFFD_GC := true
-PRODUCT_DEX_PREOPT_DEFAULT_COMPILER_FILTER := speed-profile
+PRODUCT_DEX_PREOPT_DEFAULT_COMPILER_FILTER := speed
+PRODUCT_SYSTEM_SERVER_COMPILER_FILTER := speed
 
 # A/B
 $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/launch_with_vendor_ramdisk.mk)

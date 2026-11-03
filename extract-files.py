@@ -55,6 +55,12 @@ blob_fixups: blob_fixups_user_type = {
     'vendor/etc/init/android.hardware.biometrics.fingerprint-service.rc': blob_fixup()
         .regex_replace('user root', 'user system')
         .regex_replace('group root', 'group system input uhid'),
+    'vendor/etc/init/android.hardware.media.c2-mediatek-64b.rc': blob_fixup()
+        .regex_replace('task_profiles ProcessCapacityHigh HighPerformance', 'priority -20\n    task_profiles ProcessCapacityMax RealtimePerformance'),
+    'vendor/etc/init/v3avpud-64b.rc': blob_fixup()
+        .regex_replace('group system media drmrpc', 'group system media drmrpc\n    priority -20\n    ioprio rt 4\n    task_profiles ProcessCapacityMax RealtimePerformance\n'),
+    'vendor/etc/mtk_platform_codecs_config.xml': blob_fixup()
+        .regex_replace('minFrequency="774000"', 'minFrequency="1800000"'),
     'vendor/lib64/android.hardware.audio.core-impl-mediatek.so': blob_fixup()
         .add_needed('libaudioutils_shim.so')
         .replace_needed('libaudio_aidl_conversion_common_ndk.so', 'libaudio_aidl_conversion_common_ndk_prebuilt.so'),

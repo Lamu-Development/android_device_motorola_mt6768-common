@@ -134,6 +134,7 @@ Only the three quirks included above are recognized at this point:
             <Limit name="measured-frame-rate-720x480" range="174-384" />
             <Limit name="measured-frame-rate-1280x720" range="88-194" />
             <Limit name="measured-frame-rate-1920x1080" range="46-101" />
+            <Limit name="measured-frame-rate-2560x1440" range="55-85" />
         </MediaCodec>
         <MediaCodec name="c2.mtk.hevc.decoder" type="video/hevc" update="true">
             <Limit name="measured-frame-rate-352x288" range="306-674" />
@@ -141,6 +142,7 @@ Only the three quirks included above are recognized at this point:
             <Limit name="measured-frame-rate-720x480" range="172-379" />
             <Limit name="measured-frame-rate-1280x720" range="94-208" />
             <Limit name="measured-frame-rate-1920x1080" range="45-99" />
+            <Limit name="measured-frame-rate-2560x1440" range="55-85" />
             <Limit name="measured-frame-rate-3840x2160" range="15-33" />
         </MediaCodec>
         <MediaCodec name="c2.mtk.vpx.decoder" type="video/x-vnd.on2.vp8" update="true">
@@ -154,6 +156,7 @@ Only the three quirks included above are recognized at this point:
             <Limit name="measured-frame-rate-640x360" range="119-263" />
             <Limit name="measured-frame-rate-1280x720" range="45-100" />
             <Limit name="measured-frame-rate-1920x1080" range="32-70" />
+            <Limit name="measured-frame-rate-2560x1440" range="55-85" />
             <Limit name="measured-frame-rate-3840x2160" range="23-51" />
         </MediaCodec>
         <!-- Google codec -->
