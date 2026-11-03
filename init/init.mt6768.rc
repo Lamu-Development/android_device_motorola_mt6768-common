@@ -967,6 +967,32 @@ on property:sys.boot_completed=1
     write /sys/module/ged/parameters/ged_monitor_3D_fence_debug 0
     write /sys/module/ged/parameters/ged_monitor_3D_fence_systrace 0
 
+    # DAMON proactive memory tuning (~1.2GB free RAM target, 4GB realistic)
+    write /sys/kernel/mm/damon/admin/kdamonds/nr_kdamonds 1
+    write /sys/kernel/mm/damon/admin/kdamonds/0/contexts/nr_contexts 1
+    write /sys/kernel/mm/damon/admin/kdamonds/0/contexts/0/operations fvaddr
+    write /sys/kernel/mm/damon/admin/kdamonds/0/contexts/0/monitoring_attrs/intervals/sample_us 5000
+    write /sys/kernel/mm/damon/admin/kdamonds/0/contexts/0/monitoring_attrs/intervals/aggr_us 100000
+    write /sys/kernel/mm/damon/admin/kdamonds/0/contexts/0/monitoring_attrs/intervals/update_us 1000000
+    write /sys/kernel/mm/damon/admin/kdamonds/0/contexts/0/monitoring_attrs/nr_regions/min 10
+    write /sys/kernel/mm/damon/admin/kdamonds/0/contexts/0/monitoring_attrs/nr_regions/max 800
+    write /sys/kernel/mm/damon/admin/kdamonds/0/contexts/0/schemes/nr_schemes 1
+    write /sys/kernel/mm/damon/admin/kdamonds/0/contexts/0/schemes/0/action pageout
+    write /sys/kernel/mm/damon/admin/kdamonds/0/contexts/0/schemes/0/access_pattern/age/min 80
+    write /sys/kernel/mm/damon/admin/kdamonds/0/contexts/0/schemes/0/access_pattern/age/max 4294967295
+    write /sys/kernel/mm/damon/admin/kdamonds/0/contexts/0/schemes/0/access_pattern/nr_accesses/min 0
+    write /sys/kernel/mm/damon/admin/kdamonds/0/contexts/0/schemes/0/access_pattern/nr_accesses/max 0
+    write /sys/kernel/mm/damon/admin/kdamonds/0/contexts/0/schemes/0/access_pattern/sz/min 4096
+    write /sys/kernel/mm/damon/admin/kdamonds/0/contexts/0/schemes/0/access_pattern/sz/max 67108864
+    write /sys/kernel/mm/damon/admin/kdamonds/0/contexts/0/schemes/0/quotas/ms 40
+    write /sys/kernel/mm/damon/admin/kdamonds/0/contexts/0/schemes/0/quotas/sz 67108864
+    write /sys/kernel/mm/damon/admin/kdamonds/0/contexts/0/schemes/0/quotas/reset_interval_ms 1000
+    write /sys/kernel/mm/damon/admin/kdamonds/0/contexts/0/schemes/0/watermarks/metric free_mem_rate
+    write /sys/kernel/mm/damon/admin/kdamonds/0/contexts/0/schemes/0/watermarks/interval_us 3000000
+    write /sys/kernel/mm/damon/admin/kdamonds/0/contexts/0/schemes/0/watermarks/high 300
+    write /sys/kernel/mm/damon/admin/kdamonds/0/contexts/0/schemes/0/watermarks/mid 200
+    write /sys/kernel/mm/damon/admin/kdamonds/0/contexts/0/schemes/0/watermarks/low 100
+
     # Reduce CPU logging overhead
     write /proc/sys/kernel/printk "3 3 3 3"
 

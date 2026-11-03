@@ -1,2 +1,6 @@
 # Allow init to manage socket nodes in /dev/socket/
 allow init socket_device:sock_file { create setattr unlink };
+
+# DAMON sysfs setup
+allow init vendor_sysfs_damon:dir r_dir_perms;
+allow init vendor_sysfs_damon:file rw_file_perms;
