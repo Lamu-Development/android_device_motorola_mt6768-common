@@ -62,6 +62,7 @@
             <Limit name="concurrent-instances" max="32" />
             <Limit name="performance-point-3840x2160" value="30" />
             <Limit name="performance-point-2560x1440" value="60" />
+            <Limit name="performance-point-1920x1080" value="60" />
             <Feature name="can-swap-width-height"/>
         </MediaCodec>
         <MediaCodec name="c2.mtk.avc.decoder.secure" type="video/avc" >
@@ -94,6 +95,7 @@
             <Limit name="concurrent-instances" max="32" />
             <Limit name="performance-point-3840x2160" value="30" />
             <Limit name="performance-point-2560x1440" value="60" />
+            <Limit name="performance-point-1920x1080" value="60" />
             <Feature name="can-swap-width-height"/>
         </MediaCodec>
         <MediaCodec name="c2.mtk.vpx.decoder" type="video/x-vnd.on2.vp8" >
@@ -125,6 +127,7 @@
             <Limit name="concurrent-instances" max="32" />
             <Limit name="performance-point-3840x2160" value="30" />
             <Limit name="performance-point-2560x1440" value="60" />
+            <Limit name="performance-point-1920x1080" value="60" />
             <Feature name="can-swap-width-height"/>
         </MediaCodec>
         <MediaCodec name="c2.mtk.vp9.decoder.secure" type="video/x-vnd.on2.vp9" >

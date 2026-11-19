@@ -106,7 +106,7 @@ sh_binary {
 prebuilt_etc {
     name: "init.usb.controller.moto.rc",
     src: "init.usb.controller.moto.rc",
-    sub_dir: "init/hw",
+    sub_dir: "init",
     vendor: true,
 }
 
@@ -115,6 +115,6 @@ prebuilt_etc {
 prebuilt_etc {
     name: "init.lamu.nfc.rc",
     src: "init.lamu.nfc.rc",
-    sub_dir: "init/hw",
+    sub_dir: "init",
     vendor: true,
 }

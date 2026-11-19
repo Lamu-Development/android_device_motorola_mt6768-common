@@ -34,22 +34,20 @@ ro.vendor.mtk_zsdhdr_support=1
 ro.vendor.vt_hevc_support=1
 ro.vendor.wfd.dummy.enable=0
 ro.vendor.wfd.iframesize.level=0
+ro.mediatek.wlan.p2p=1
+ro.mediatek.wlan.wsc=1
 ro.vendor.num_md_protocol=2
 ro.vendor.pref_scale_enable_cfg=1
 ro.bluetooth.a2dp_offload.supported=true
+vendor.bluetooth.lhdc_codec.supported=true
 
 # Display and performance — SF, SkiaGL, Mali Vulkan, Duraspeed, LMK
 debug.renderengine.backend=skiagl
-ro.hardware.vulkan=mali
 ro.lmk.downgrade_pressure=60
 persist.adb.nonblocking_ffs=1
-vendor.debug.sf.cpupolicy=0
 vendor.debug.sf.cpupolicy.base_min_bl=350
-vendor.debug.sf.cpupolicy.bl_mask=0xc0
 vendor.debug.sf.cpupolicy.hw_comp_suspend=1
 vendor.debug.sf.cpupolicy.hw_hfr_suspend=1
-vendor.debug.sf.cpupolicy.ll_mask=0x3f
-vendor.debug.sf.cpupolicy.llbl_mask=0xff
 vendor.debug.sf.cpupolicy.max_correct_offset=450
 vendor.debug.sf.cpupolicy.min_90=80
 vendor.debug.sf.cpupolicy.min_correct_offset=-50
@@ -60,7 +58,7 @@ vendor.debug.sf.cpupolicy.upbound_uclamp_min=532
 vendor.boostfwk.version=2
 vendor.boostfwk.scroll.policy.mode=1
 vendor.boostfwk.scroll.interrupt.touchboost=1
-persist.vendor.duraspeed.support=1
+persist.vendor.duraspeed.support=0
 persist.vendor.duraspeed.app.on=1
 persist.vendor.duraspeed.lowmemory.enable=1
 vendor.mtk_thumbnail_optimization=true
@@ -73,17 +71,25 @@ vendor.af.pausewait.enable=false
 vendor.af.threshold.src_and_effect_count=5
 
 # RIL — fast dormancy and per-SIM RAT
-persist.vendor.radio.fd.counter=150
-persist.vendor.radio.fd.off.counter=50
-persist.vendor.radio.fd.off.r8.counter=50
-persist.vendor.radio.fd.r8.counter=150
+persist.vendor.radio.fd.counter=30
+persist.vendor.radio.fd.off.counter=30
+persist.vendor.radio.fd.off.r8.counter=30
+persist.vendor.radio.fd.r8.counter=30
+persist.vendor.radio.smart.data.switch=0
+ro.ril.wake_lock_timeout=500
 persist.vendor.radio.mtk_ps2_rat=L/W/G
 persist.vendor.radio.mtk_ps3_rat=G
 persist.vendor.mdrsra_v3_support=1
 persist.vendor.pms_removable=1
 persist.vendor.wfc.sys_wfc_support=1
+persist.vendor.mdlog.flush_log_ratio=0
+persist.vendor.mtk_rtt_support=1
+persist.vendor.vzw_device_type=0
 
 # Stock build identity
+ro.mediatek.version.branch=alps-mp-v0.mssi1
+ro.mediatek.version.build.branch=
+ro.mediatek.version.release=alps-mp-v0.mp1.rc-V2_tinno.nj.v0mp1rc.k6991v1.64_P54
 ro.vendor.mediatek.platform=MT6768
 ro.vendor.mediatek.version.branch=alps-mp-v0.mp1
 ro.vendor.mediatek.version.release=alps-mp-v0.mp1.rc-V2_tinno.nj.v0mp1rc.k6991v1.64_P54

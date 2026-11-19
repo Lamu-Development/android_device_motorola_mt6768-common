@@ -13,6 +13,3 @@ type blackbox_block_device, dev_type;
 
 # VCodec sysfs parameters
 type vendor_sysfs_vcodec, fs_type, sysfs_type;
-
-# DAMON sysfs
-type vendor_sysfs_damon, fs_type, sysfs_type;

@@ -47,7 +47,7 @@
             "Name":"mtktsAP",
             "Type":"SKIN",
             "Multiplier": 0.001,
-            "HotThreshold":[ "NaN", 43.0, 45.0, 50.0, 70.0, 80.0, 90.0 ],
+            "HotThreshold":[ "NaN", 47.0, 50.0, 55.0, 70.0, 80.0, 90.0 ],
             "VrThreshold": "NaN"
         },
         {
@@ -82,14 +82,6 @@
         {
             "Name":"devfreq-13040000.mali",
             "Type":"GPU"
-        },
-        {
-            "Name":"mtk-cl-bcct00",
-            "Type":"BATTERY"
-        },
-        {
-            "Name":"mtk-cl-backlight01",
-            "Type":"BATTERY"
         }
     ]
 }

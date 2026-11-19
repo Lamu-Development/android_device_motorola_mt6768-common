@@ -208,10 +208,10 @@ TARGET_BOARD_PLATFORM := mt6768
 # Power
 PRODUCT_PACKAGES += \
     android.hardware.power-service.lineage-libperfmgr \
-    libperfmgr \
     libmtkperf_client \
     libmtkperf_client_vendor \
     libperfctl_vendor \
+    libperfmgr \
     libpowerhalwrap \
     libpowerhalwrap_vendor \
     vendor.mediatek.hardware.mtkpower-service.stub
@@ -223,19 +223,16 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PACKAGES += \
     libion_mtk \
-    vendor.mediatek.hardware.bluetooth.audio-V1-ndk \
     vendor.mediatek.hardware.bluetooth.audio-V3-ndk \
-    vendor.mediatek.hardware.bluetooth.audio@2.1 \
-    vendor.mediatek.hardware.bluetooth.audio@2.2 \
     vendor.mediatek.hardware.mtkpower@1.0.vendor
 
 # Properties
-include hardware/mediatek/configs/properties/vendor_logtag.mk
+-include hardware/mediatek/configs/properties/vendor_logtag.mk
 
 # Radio
 ENABLE_VENDOR_RIL_SERVICE := true
 
-$(call inherit-product, hardware/lineage/compat/frameworks/compat.mk)
+$(call inherit-product-if-exists, hardware/lineage/compat/frameworks/compat.mk)
 $(call inherit-product, hardware/mediatek/frameworks/mediatek-frameworks.mk)
 
 PRODUCT_PACKAGES += \

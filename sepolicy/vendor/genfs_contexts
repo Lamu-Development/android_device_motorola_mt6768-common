@@ -28,6 +28,3 @@ genfscon sysfs /devices/platform/11012000.spi2/spi_master/spi2/spi2.0/omnivision
 
 # VCodec
 genfscon sysfs /module/mtk_vcodec_dec_v1/parameters                                                                                    u:object_r:vendor_sysfs_vcodec:s0
-
-# DAMON
-genfscon sysfs /kernel/mm/damon                                                                                                        u:object_r:vendor_sysfs_damon:s0

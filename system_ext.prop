@@ -6,24 +6,8 @@ ro.config.media_vol_default=5
 ro.config.vc_call_vol_default=6
 ro.config.vc_call_vol_steps=8
 
-# Bluetooth (LHDC codec support)
-vendor.bluetooth.lhdc_codec.supported=true
-
 # Display
 sys.brightness.disable_gamma_conversion=true
 
-# Radio & Logging
-persist.vendor.mdlog.flush_log_ratio=0
-persist.vendor.mtk_rtt_support=1
-persist.vendor.vzw_device_type=0
+# Radio
 ro.telephony.sim.count=2
-ro.vendor.mtk_telephony_add_on_policy=0
-vendor.rild.libargs=-d /dev/ttyC0
-vendor.rild.libpath=mtk-ril.so
-
-# WLAN & MediaTek System Version Identity
-ro.mediatek.wlan.p2p=1
-ro.mediatek.wlan.wsc=1
-ro.mediatek.version.branch=alps-mp-v0.mssi1
-ro.mediatek.version.build.branch=
-ro.mediatek.version.release=alps-mp-v0.mp1.rc-V2_tinno.nj.v0mp1rc.k6991v1.64_P54

@@ -14,14 +14,6 @@ debug.sf.treat_170m_as_sRGB=1
 debug.sf.default_touch_timer_ms=4000
 debug.sf.predict_hwc_composition_strategy=0
 debug.sf.enable_transaction_tracing=false
-debug.sf.late.sf.duration=27600000
-debug.sf.late.app.duration=20000000
-debug.sf.early.sf.duration=27600000
-debug.sf.early.app.duration=20000000
-debug.sf.earlyGl.sf.duration=27600000
-debug.sf.earlyGl.app.duration=20000000
-debug.sf.hwc.min.duration=23000000
-debug.sf.enable_gl_backpressure=0
 
 # MediaTek / Tinno performance boost & window response
 ro.tn.performance=1
@@ -51,9 +43,9 @@ ro.property_service.async_persist_writes=true
 media.stagefright.thumbnail.prefer_hw_codecs=true
 persist.bluetooth.lhdc_codec.enabled=true
 persist.sys.duraspeed.cpu_trigger=true
-persist.sys.duraspeed.screenoff_trigger=true
-persist.sys.zram_wb_enabled=true
-persist.sys.zram_wb_ai_enabled=true
+persist.sys.duraspeed.screenoff_trigger=false
+persist.sys.zram_wb_enabled=false
+persist.sys.zram_wb_ai_enabled=false
 persist.sys.fuse.passthrough.enable=true
 persist.system.powerhal.applist_enable=1
 
