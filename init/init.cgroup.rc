@@ -54,12 +54,6 @@ on property:sys.boot_completed=1
     # Stock powercontable.xml InitWrite defaults (GED / FPSGO / TouchBoost / sugov_ext)
     write /sys/devices/system/cpu/cpufreq/sugov_ext/up_rate_limit_us 500
     write /sys/devices/system/cpu/cpufreq/sugov_ext/down_rate_limit_us 20000
-    write /sys/devices/system/cpu/cpufreq/policy0/sugov_ext/up_rate_limit_us 500
-    write /sys/devices/system/cpu/cpufreq/policy0/sugov_ext/down_rate_limit_us 20000
-    write /sys/devices/system/cpu/cpufreq/policy0/sugov_ext/iowait_boost_enable 1
-    write /sys/devices/system/cpu/cpufreq/policy6/sugov_ext/up_rate_limit_us 500
-    write /sys/devices/system/cpu/cpufreq/policy6/sugov_ext/down_rate_limit_us 20000
-    write /sys/devices/system/cpu/cpufreq/policy6/sugov_ext/iowait_boost_enable 1
     write /sys/kernel/ged/hal/gpu_boost_level 100
     write /sys/module/mtk_fpsgo/parameters/bhr 5
     write /sys/module/mtk_fpsgo/parameters/boost_affinity 0
@@ -79,10 +73,13 @@ on property:sys.boot_completed=1
     write /sys/kernel/fpsgo/minitop/enable 1
     write /sys/kernel/fpsgo/minitop/thrs_heavy 70
     write /proc/touch_boost/enable 1
-    write /proc/touch_boost/boost_opp_cluster_0 2
-    write /proc/touch_boost/boost_opp_cluster_1 2
-    write /proc/touch_boost/boost_duration 200
-    write /proc/touch_boost/boost_ta 80
+    write /proc/touch_boost/boost_opp_cluster_0 0
+    write /proc/touch_boost/boost_opp_cluster_1 0
+    write /proc/touch_boost/boost_up 1
+    write /proc/touch_boost/boost_duration 380
+    write /proc/touch_boost/boost_ta 60
+    write /sys/devices/platform/11012000.spi2/power/control on
+    write /sys/devices/platform/11012000.spi2/spi_master/spi2/spi2.0/power/control on
 
     # Modern Memory Management: MGLRU (Multi-Gen LRU) proactive aging
     write /sys/kernel/mm/lru_gen/enabled 7
