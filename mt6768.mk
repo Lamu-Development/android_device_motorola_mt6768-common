@@ -12,6 +12,11 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
 # Setup dalvik vm configs
 $(call inherit-product, frameworks/native/build/phone-xhdpi-4096-dalvik-heap.mk)
 
+# ART & Dexpreopt (parity with stock VVTA35.51-158: ro.dalvik.vm.enable_uffd_gc=true)
+PRODUCT_ENABLE_UFFD_GC := true
+PRODUCT_DEX_PREOPT_DEFAULT_COMPILER_FILTER := speed
+PRODUCT_SYSTEM_SERVER_COMPILER_FILTER := speed
+
 # A/B
 $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/launch_with_vendor_ramdisk.mk)
 
@@ -20,16 +25,19 @@ PRODUCT_PACKAGES += \
     update_engine_sideload \
     update_verifier
 
+# Track BOARD_*IMAGE_FILE_SYSTEM_TYPE dynamically to prevent postinstall mount failures.
+# update_engine mounts postinstall partitions using the declared filesystem type.
+# Divergence triggers kPostInstallMountError (status 63).
 AB_OTA_POSTINSTALL_CONFIG += \
     RUN_POSTINSTALL_system=true \
     POSTINSTALL_PATH_system=system/bin/otapreopt_script \
-    FILESYSTEM_TYPE_system=ext4 \
+    FILESYSTEM_TYPE_system=$(BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE) \
     POSTINSTALL_OPTIONAL_system=true
 
 AB_OTA_POSTINSTALL_CONFIG += \
     RUN_POSTINSTALL_vendor=true \
     POSTINSTALL_PATH_vendor=bin/checkpoint_gc \
-    FILESYSTEM_TYPE_vendor=erofs \
+    FILESYSTEM_TYPE_vendor=$(BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE) \
     POSTINSTALL_OPTIONAL_vendor=true
 
 PRODUCT_PACKAGES += \
@@ -203,6 +211,7 @@ PRODUCT_PACKAGES += \
     libmtkperf_client \
     libmtkperf_client_vendor \
     libperfctl_vendor \
+    libperfmgr \
     libpowerhalwrap \
     libpowerhalwrap_vendor
 
@@ -213,12 +222,12 @@ PRODUCT_PACKAGES += \
     vendor.mediatek.hardware.mtkpower@1.0.vendor
 
 # Properties
-include hardware/mediatek/configs/properties/vendor_logtag.mk
+-include hardware/mediatek/configs/properties/vendor_logtag.mk
 
 # Radio
 ENABLE_VENDOR_RIL_SERVICE := true
 
-$(call inherit-product, hardware/lineage/compat/frameworks/compat.mk)
+$(call inherit-product-if-exists, hardware/lineage/compat/frameworks/compat.mk)
 $(call inherit-product, hardware/mediatek/frameworks/mediatek-frameworks.mk)
 
 PRODUCT_PACKAGES += \
@@ -244,6 +253,8 @@ PRODUCT_PACKAGES += \
     init.connectivity.common.rc \
     init.connectivity.rc \
     init.insmod.sh \
+    init.lamu.nfc.rc \
+    init.usb.controller.moto.rc \
     init.modem.rc \
     init.mt6768.rc \
     init.mt6768.usb.rc \
@@ -292,7 +303,8 @@ PRODUCT_SOONG_NAMESPACES += \
 
 # Thermal
 PRODUCT_PACKAGES += \
-    android.hardware.thermal-service.mediatek
+    android.hardware.thermal-service.mediatek \
+    pixelatoms-cpp
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/thermal/thermal_info_config.json:$(TARGET_COPY_OUT_VENDOR)/etc/thermal_info_config.json

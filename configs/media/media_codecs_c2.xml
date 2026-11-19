@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright (C) 2014 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
@@ -61,6 +61,8 @@
             <Feature name="dynamic-color-aspects"/>
             <Limit name="concurrent-instances" max="32" />
             <Limit name="performance-point-3840x2160" value="30" />
+            <Limit name="performance-point-2560x1440" value="60" />
+            <Limit name="performance-point-1920x1080" value="60" />
             <Feature name="can-swap-width-height"/>
         </MediaCodec>
         <MediaCodec name="c2.mtk.avc.decoder.secure" type="video/avc" >
@@ -92,6 +94,8 @@
             <Feature name="dynamic-color-aspects"/>
             <Limit name="concurrent-instances" max="32" />
             <Limit name="performance-point-3840x2160" value="30" />
+            <Limit name="performance-point-2560x1440" value="60" />
+            <Limit name="performance-point-1920x1080" value="60" />
             <Feature name="can-swap-width-height"/>
         </MediaCodec>
         <MediaCodec name="c2.mtk.vpx.decoder" type="video/x-vnd.on2.vp8" >
@@ -122,6 +126,8 @@
             <Feature name="dynamic-color-aspects"/>
             <Limit name="concurrent-instances" max="32" />
             <Limit name="performance-point-3840x2160" value="30" />
+            <Limit name="performance-point-2560x1440" value="60" />
+            <Limit name="performance-point-1920x1080" value="60" />
             <Feature name="can-swap-width-height"/>
         </MediaCodec>
         <MediaCodec name="c2.mtk.vp9.decoder.secure" type="video/x-vnd.on2.vp9" >

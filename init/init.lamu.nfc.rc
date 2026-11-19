@@ -1,0 +1,14 @@
+# SKU-based secure_element service control.
+#
+# Non-NFC SKUs (e.g. XT2523-2 = `nonfc_dsds`) do not have an embedded SE (eSE),
+# causing the MediaTek secure_element HAL service to crash on boot in an infinite loop:
+#   Fatal signal 6 (SIGABRT), code -1 (SI_QUEUE)
+#   Executable: /vendor/bin/hw/android.hardware.secure_element@1.2-service-mediatek
+#   Abort message: 'Check failed: status == STATUS_OK (status=-3, STATUS_OK=0)'
+#
+# Stopping the service marks it disabled, preventing restarts on non-NFC variants.
+on property:ro.boot.product.hardware.sku=nonfc_dsds
+    stop mtk_secure_element_hal_service
+
+on property:ro.boot.product.hardware.sku=nonfc_ss
+    stop mtk_secure_element_hal_service

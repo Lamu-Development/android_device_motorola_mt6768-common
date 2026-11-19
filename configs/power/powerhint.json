@@ -4,7 +4,6 @@
       "Name": "MemFreq",
       "Path": "/sys/devices/platform/10012000.dvfsrc/mtk-dvfsrc-devfreq/devfreq/mtk-dvfsrc-devfreq/userspace/set_freq",
       "Values": [
-        "5500000000",
         "3600000000",
         "2400000000",
         "1534000000",
@@ -44,14 +43,7 @@
         "21",
         "22",
         "23",
-        "24",
-        "25",
-        "26",
-        "27",
-        "28",
-        "29",
-        "30",
-        "31"
+        "24"
       ],
       "ResetOnInit": true,
       "DefaultIndex": 0,
@@ -198,16 +190,17 @@
       "Name": "UclampTALatency",
       "Path": "/dev/cpuctl/top-app/cpu.uclamp.latency_sensitive",
       "Values": [
-        "0",
-        "1"
+        "1",
+        "0"
       ],
+      "DefaultIndex": 0,
       "ResetOnInit": true
     },
     {
       "Name": "UclampTAMin",
       "Path": "/dev/cpuctl/top-app/cpu.uclamp.min",
       "Values": [
-        "0",
+        "20",
         "40",
         "100"
       ],
@@ -271,7 +264,7 @@
       "PowerHint": "LAUNCH",
       "Node": "MemFreq",
       "Duration": 0,
-      "Value": "5500000000"
+      "Value": "3600000000"
     },
     {
       "PowerHint": "LAUNCH",
@@ -307,7 +300,7 @@
       "PowerHint": "GAME",
       "Node": "UclampTAMin",
       "Duration": 0,
-      "Value": "100"
+      "Value": "40"
     },
     {
       "PowerHint": "AUDIO_STREAMING_LOW_LATENCY",
@@ -325,13 +318,13 @@
       "PowerHint": "INTERACTION",
       "Node": "CPUEfficiencyClusterMinFreq",
       "Duration": 0,
-      "Value": "1100000"
+      "Value": "1450000"
     },
     {
       "PowerHint": "INTERACTION",
       "Node": "CPUSuperClusterMinFreq",
       "Duration": 0,
-      "Value": "1176000"
+      "Value": "1621000"
     },
     {
       "PowerHint": "INTERACTION",
@@ -349,7 +342,67 @@
       "PowerHint": "INTERACTION",
       "Node": "UclampTAMin",
       "Duration": 0,
-      "Value": "100"
+      "Value": "40"
+    },
+    {
+      "PowerHint": "INTERACTION",
+      "Node": "UclampTALatency",
+      "Duration": 0,
+      "Value": "1"
+    },
+    {
+      "PowerHint": "INTERACTION",
+      "Node": "MemFreq",
+      "Duration": 0,
+      "Value": "3600000000"
+    },
+    {
+      "PowerHint": "INTERACTION",
+      "Node": "GpuPwrLevel",
+      "Duration": 0,
+      "Value": "0"
+    },
+    {
+      "PowerHint": "INTERACTION",
+      "Node": "GPUDVFSInterval",
+      "Duration": 0,
+      "Value": "50"
+    },
+    {
+      "PowerHint": "INTERACTIVE",
+      "Node": "CPUEfficiencyClusterMinFreq",
+      "Duration": 800,
+      "Value": "1700000"
+    },
+    {
+      "PowerHint": "INTERACTIVE",
+      "Node": "CPUSuperClusterMinFreq",
+      "Duration": 800,
+      "Value": "2000000"
+    },
+    {
+      "PowerHint": "INTERACTIVE",
+      "Node": "MemFreq",
+      "Duration": 800,
+      "Value": "3600000000"
+    },
+    {
+      "PowerHint": "INTERACTIVE",
+      "Node": "GpuPwrLevel",
+      "Duration": 800,
+      "Value": "0"
+    },
+    {
+      "PowerHint": "INTERACTIVE",
+      "Node": "UclampTAMin",
+      "Duration": 800,
+      "Value": "40"
+    },
+    {
+      "PowerHint": "INTERACTIVE",
+      "Node": "UclampTALatency",
+      "Duration": 800,
+      "Value": "1"
     },
     {
       "PowerHint": "EXPENSIVE_RENDERING",
@@ -385,7 +438,50 @@
       "PowerHint": "EXPENSIVE_RENDERING",
       "Node": "MemFreq",
       "Duration": 0,
-      "Value": "5500000000"
+      "Value": "3600000000"
+    },
+    {
+      "PowerHint": "EXPENSIVE_RENDERING",
+      "Node": "CPUSuperClusterMinFreq",
+      "Duration": 0,
+      "Value": "1621000"
+    },
+    {
+      "PowerHint": "EXPENSIVE_RENDERING",
+      "Node": "CPUEfficiencyClusterMinFreq",
+      "Duration": 0,
+      "Value": "1450000"
+    },
+    {
+      "PowerHint": "EXPENSIVE_RENDERING",
+      "Node": "UclampTAMin",
+      "Duration": 0,
+      "Value": "40"
+    }
+  ],
+  "AdpfConfig": [
+    {
+      "Name": "DEFAULT",
+      "PID_On": true,
+      "PID_Po": 2.0,
+      "PID_Pu": 0.0,
+      "PID_I": 0.001,
+      "PID_I_Init": 200,
+      "PID_I_High": 512,
+      "PID_I_Low": -30,
+      "PID_Do": 500.0,
+      "PID_Du": 0.0,
+      "UclampMin_On": true,
+      "UclampMin_Init": 20,
+      "UclampMin_High": 80,
+      "UclampMin_Low": 10,
+      "UclampMin_LoadUp": 80,
+      "SamplingWindow_P": 1,
+      "SamplingWindow_I": 0,
+      "SamplingWindow_D": 1,
+      "StaleTimeFactor": 10.0,
+      "TargetTimeFactor": 1.0,
+      "ReportingRateLimitNs": 16666666
     }
   ]
 }

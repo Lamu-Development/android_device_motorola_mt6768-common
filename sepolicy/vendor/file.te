@@ -3,3 +3,13 @@ type vendor_sysfs_audio, fs_type, sysfs_type;
 
 # Fingerprint
 type vendor_sysfs_fingerprint, fs_type, sysfs_type;
+
+# Regulatory label
+type elabel_data_file, file_type, data_file_type;
+type elabel_block_device, dev_type;
+
+# Blackbox block device
+type blackbox_block_device, dev_type;
+
+# VCodec sysfs parameters
+type vendor_sysfs_vcodec, fs_type, sysfs_type;

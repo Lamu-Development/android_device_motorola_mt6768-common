@@ -39,6 +39,8 @@ blob_fixups: blob_fixups_user_type = {
         .replace_needed('av-audio-types-aidl-V1-ndk.so', 'av-audio-types-aidl-V3-ndk.so'),
     'system_ext/lib64/libimsma.so': blob_fixup()
         .replace_needed('libsink.so', 'libsink-mtk.so'),
+    'system_ext/lib64/libsink-mtk.so': blob_fixup()
+        .add_needed('libaudioclient_shim.so'),
     'system_ext/priv-app/ImsService/ImsService.apk': blob_fixup()
         .apktool_patch('blob-patches/ImsService'),
     (
@@ -46,17 +48,30 @@ blob_fixups: blob_fixups_user_type = {
         'vendor/lib64/hw/android.hardware.soundtrigger3-impl.so',
     ): blob_fixup()
         .replace_needed('libaudio_aidl_conversion_common_ndk.so', 'libaudio_aidl_conversion_common_ndk_prebuilt.so'),
+    'vendor/bin/mnld': blob_fixup()
+        .replace_needed('android.hardware.sensors-V2-ndk.so', 'android.hardware.sensors-V3-ndk.so')
+        .replace_needed('libmnl.so', 'libmnl_mtk.so'),
     'vendor/etc/init/android.hardware.biometrics.fingerprint-service.rc': blob_fixup()
         .regex_replace('user root', 'user system')
         .regex_replace('group root', 'group system input uhid'),
+    'vendor/etc/init/android.hardware.media.c2-mediatek-64b.rc': blob_fixup()
+        .regex_replace('task_profiles ProcessCapacityHigh HighPerformance', 'priority -20\n    task_profiles ProcessCapacityMax RealtimePerformance\n    writepid /dev/cpuset/video-decoder/cgroup.procs'),
+    'vendor/etc/init/v3avpud-64b.rc': blob_fixup()
+        .regex_replace('group system media drmrpc', 'group system media drmrpc\n    priority -20\n    ioprio rt 4\n    task_profiles ProcessCapacityMax RealtimePerformance\n    writepid /dev/cpuset/video-decoder/cgroup.procs\n'),
+    'vendor/etc/mtk_platform_codecs_config.xml': blob_fixup()
+        .regex_replace('cluster="0"', 'cluster="1"')
+        .regex_replace('minFrequency="774000"', 'minFrequency="2000000"'),
     'vendor/lib64/android.hardware.audio.core-impl-mediatek.so': blob_fixup()
         .add_needed('libaudioutils_shim.so')
         .replace_needed('libaudio_aidl_conversion_common_ndk.so', 'libaudio_aidl_conversion_common_ndk_prebuilt.so'),
-    (
-        'vendor/bin/mnld',
-        'vendor/lib64/libaalservice.so',
-    ): blob_fixup()
+    # lineage-23.2 ships bluetooth.audio-V1-ndk.so as a prebuilt blob; keep original NEEDED.
+    'vendor/lib64/libaalservice.so': blob_fixup()
         .replace_needed('android.hardware.sensors-V2-ndk.so', 'android.hardware.sensors-V3-ndk.so'),
+    (
+        'vendor/lib64/libcodec2_mtk_vdec.so',
+        'vendor/lib64/libcodec2_mtk_venc.so',
+    ): blob_fixup()
+        .replace_needed('libformatter.so', 'libformatter_mtk.so'),
     (
         'vendor/bin/hw/android.hardware.graphics.allocator-V2-service-mediatek',
         'vendor/lib64/egl/libGLES_mali.so',

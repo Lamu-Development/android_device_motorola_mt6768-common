@@ -47,3 +47,17 @@ persist.fsck.disable_linear_lookup=on
 
 # RKPD
 remote_provisioning.hostname=remoteprovisioning.googleapis.com
+
+# WindowManager & UX (stock product/etc/build.prop)
+persist.wm.extensions.enabled=true
+ro.bootanim.preload=1
+ro.support_one_handed_mode=true
+
+# ART / Garbage Collection (stock product/etc/build.prop)
+ro.dalvik.vm.enable_uffd_gc=true
+
+# Dex2oat & ART thread/core allocation (preserve Cortex-A75 cores 6-7 for UI)
+dalvik.vm.boot-dex2oat-threads=6
+dalvik.vm.dex2oat-threads=4
+dalvik.vm.background-dex2oat-threads=2
+dalvik.vm.dex2oat-cpu-set=0,1,2,3,4,5

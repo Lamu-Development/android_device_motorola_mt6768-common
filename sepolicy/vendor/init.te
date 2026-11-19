@@ -1,0 +1,2 @@
+# Allow init to manage socket nodes in /dev/socket/
+allow init socket_device:sock_file { create setattr unlink };

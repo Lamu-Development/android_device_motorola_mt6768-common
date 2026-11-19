@@ -1,3 +1,10 @@
 # Fingerprint
 /vendor/bin/hw/android\.hardware\.biometrics\.fingerprint-service\.example              u:object_r:hal_fingerprint_default_exec:s0
 /vendor/bin/hw/android\.hardware\.biometrics\.fingerprint-service\.gf                   u:object_r:hal_fingerprint_default_exec:s0
+
+# Regulatory label
+/mnt/elabel(/.*)?                                                                      u:object_r:elabel_data_file:s0
+/dev/block/by-name/elabel                                                              u:object_r:elabel_block_device:s0
+
+# Blackbox
+/dev/block/by-name/blackbox                                                            u:object_r:blackbox_block_device:s0

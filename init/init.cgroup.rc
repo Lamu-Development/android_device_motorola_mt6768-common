@@ -1,20 +1,20 @@
 on post-fs
     # boot perf. tune
-    write /sys/devices/system/cpu/cpufreq/policy0/scaling_min_freq 1800000
+    write /sys/devices/system/cpu/cpufreq/policy0/scaling_min_freq 1700000
     write /sys/devices/system/cpu/cpufreq/policy6/scaling_min_freq 2000000
-    write /sys/class/devfreq/mtk-dvfsrc-devfreq/userspace/set_freq 5500000000
+    write /sys/class/devfreq/mtk-dvfsrc-devfreq/userspace/set_freq 3600000000
 
 on late-fs
-    write /sys/devices/system/cpu/cpufreq/policy0/scaling_min_freq 1800000
+    write /sys/devices/system/cpu/cpufreq/policy0/scaling_min_freq 1700000
     write /sys/devices/system/cpu/cpufreq/policy6/scaling_min_freq 2000000
-    write /sys/class/devfreq/mtk-dvfsrc-devfreq/userspace/set_freq 5500000000
+    write /sys/class/devfreq/mtk-dvfsrc-devfreq/userspace/set_freq 3600000000
 
 on early-init
     # boot perf. tune
-    write /sys/devices/system/cpu/cpufreq/policy0/scaling_min_freq 1800000
+    write /sys/devices/system/cpu/cpufreq/policy0/scaling_min_freq 1700000
     write /sys/devices/system/cpu/cpufreq/policy6/scaling_min_freq 2000000
     write /sys/devices/platform/10012000.dvfsrc/helio-dvfsrc/dvfsrc_req_ddr_opp 0
-    write /sys/class/devfreq/mtk-dvfsrc-devfreq/userspace/set_freq 5500000000
+    write /sys/class/devfreq/mtk-dvfsrc-devfreq/userspace/set_freq 3600000000
 
 on charger
     write /sys/devices/system/cpu/cpufreq/policy0/scaling_min_freq 0
@@ -25,13 +25,13 @@ on late-fs
     write /sys/devices/platform/10012000.dvfsrc/helio-dvfsrc/dvfsrc_req_ddr_opp 0
 
 on post-fs-data
-    write /sys/devices/system/cpu/cpufreq/policy0/scaling_governor schedutil
-    write /sys/devices/system/cpu/cpufreq/policy6/scaling_governor schedutil
+    write /sys/devices/system/cpu/cpufreq/policy0/scaling_governor sugov_ext
+    write /sys/devices/system/cpu/cpufreq/policy6/scaling_governor sugov_ext
     write /proc/sys/kernel/sched_pelt_multiplier 4
-    write /proc/sys/kernel/sched_util_clamp_min_rt_default 0
-    write /sys/devices/system/cpu/cpufreq/policy0/scaling_min_freq 1800000
+    write /proc/sys/kernel/sched_util_clamp_min_rt_default 512
+    write /sys/devices/system/cpu/cpufreq/policy0/scaling_min_freq 1700000
     write /sys/devices/system/cpu/cpufreq/policy6/scaling_min_freq 2000000
-    write /sys/class/devfreq/mtk-dvfsrc-devfreq/userspace/set_freq 5500000000
+    write /sys/class/devfreq/mtk-dvfsrc-devfreq/userspace/set_freq 3600000000
 
 on boot
     # boot perf. tune
@@ -51,7 +51,42 @@ on boot
     chown media system /dev/drm_wv
 
 on property:sys.boot_completed=1
-    write /sys/kernel/debug/sched/migration_cost_ns 200000
+    # Stock powercontable.xml InitWrite defaults (GED / FPSGO / TouchBoost / sugov_ext)
+    write /sys/devices/system/cpu/cpufreq/sugov_ext/up_rate_limit_us 500
+    write /sys/devices/system/cpu/cpufreq/sugov_ext/down_rate_limit_us 20000
+    write /sys/devices/system/cpu/cpufreq/policy0/sugov_ext/up_rate_limit_us 500
+    write /sys/devices/system/cpu/cpufreq/policy0/sugov_ext/down_rate_limit_us 20000
+    write /sys/devices/system/cpu/cpufreq/policy0/sugov_ext/iowait_boost_enable 1
+    write /sys/devices/system/cpu/cpufreq/policy6/sugov_ext/up_rate_limit_us 500
+    write /sys/devices/system/cpu/cpufreq/policy6/sugov_ext/down_rate_limit_us 20000
+    write /sys/devices/system/cpu/cpufreq/policy6/sugov_ext/iowait_boost_enable 1
+    write /sys/kernel/ged/hal/gpu_boost_level 100
+    write /sys/module/mtk_fpsgo/parameters/bhr 5
+    write /sys/module/mtk_fpsgo/parameters/boost_affinity 0
+    write /sys/module/mtk_fpsgo/parameters/boost_LR 0
+    write /sys/kernel/fpsgo/fstb/margin_mode 0
+    write /sys/kernel/fpsgo/fstb/fstb_reset_tolerence 0
+    write /sys/kernel/fpsgo/fbt/rescue_enable 1
+    write /sys/kernel/fpsgo/fbt/light_loading_policy 0
+    write /sys/kernel/fpsgo/fbt/set_ls 1
+    write /sys/kernel/fpsgo/fbt/enable_ceiling 1
+    write /sys/kernel/fpsgo/fbt/cpumask_heavy 255
+    write /sys/kernel/fpsgo/fbt/cpumask_second 255
+    write /sys/kernel/fpsgo/fbt/cpumask_others 255
+    write /sys/kernel/fpsgo/xgf/xgf_spid_ck_period 1000000000
+    write /sys/kernel/fpsgo/xgf/xgf_extra_sub 0
+    write /sys/kernel/fpsgo/xgf/xgf_cfg_spid 0
+    write /sys/kernel/fpsgo/minitop/enable 1
+    write /sys/kernel/fpsgo/minitop/thrs_heavy 70
+    write /proc/touch_boost/enable 1
+    write /proc/touch_boost/boost_opp_cluster_0 2
+    write /proc/touch_boost/boost_opp_cluster_1 2
+    write /proc/touch_boost/boost_duration 200
+    write /proc/touch_boost/boost_ta 80
+
+    # Modern Memory Management: MGLRU (Multi-Gen LRU) proactive aging
+    write /sys/kernel/mm/lru_gen/enabled 7
+    write /sys/kernel/mm/lru_gen/min_ttl_ms 1000
 
     # Enable PowerHAL hint processing
     setprop vendor.powerhal.init 1
@@ -66,10 +101,17 @@ on property:sys.boot_completed=1
     write /dev/cpuctl/system/cpu.uclamp.min 0
     write /dev/cpuctl/system/cpu.uclamp.latency_sensitive 0
     write /dev/cpuctl/system-background/cpu.uclamp.min 0
+    write /dev/cpuctl/system-background/cpu.uclamp.max 35
     write /dev/cpuctl/system-background/cpu.uclamp.latency_sensitive 0
     write /dev/cpuctl/foreground/cpu.uclamp.min 0
-    write /dev/cpuctl/foreground/cpu.uclamp.latency_sensitive 0
-    write /dev/cpuctl/top-app/cpu.uclamp.min 0
-    write /dev/cpuctl/top-app/cpu.uclamp.latency_sensitive 0
+    write /dev/cpuctl/foreground/cpu.uclamp.latency_sensitive 1
+    write /dev/cpuctl/top-app/cpu.uclamp.min 20
+    write /dev/cpuctl/top-app/cpu.uclamp.latency_sensitive 1
+    write /dev/cpuctl/rt/cpu.uclamp.min 50
+    write /dev/cpuctl/rt/cpu.uclamp.latency_sensitive 1
     write /dev/cpuctl/background/cpu.uclamp.min 0
+    write /dev/cpuctl/background/cpu.uclamp.max 30
     write /dev/cpuctl/background/cpu.uclamp.latency_sensitive 0
+
+    # V4L2 video decoder low-latency per-frame dispatch (eliminates 1440p60 batching frame drops)
+    write /sys/module/mtk_vcodec_dec_v1/parameters/mtk_vdec_lpw_limit 1
