@@ -42,7 +42,7 @@ ro.bluetooth.a2dp_offload.supported=true
 vendor.bluetooth.lhdc_codec.supported=true
 
 # Display and performance — SF, SkiaGL, Mali Vulkan, Duraspeed, LMK
-debug.renderengine.backend=skiagl
+debug.renderengine.backend=skiaglthreaded
 ro.lmk.downgrade_pressure=60
 persist.adb.nonblocking_ffs=1
 vendor.debug.sf.cpupolicy.base_min_bl=350

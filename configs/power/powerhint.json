@@ -243,13 +243,19 @@
     {
       "Name": "PowerHALAudioState",
       "Path": "vendor.powerhal.audio",
-      "Values": ["AUDIO_STREAMING_LOW_LATENCY", ""],
+      "Values": [
+        "AUDIO_STREAMING_LOW_LATENCY",
+        ""
+      ],
       "Type": "Property"
     },
     {
       "Name": "PowerHALRenderingState",
       "Path": "vendor.powerhal.rendering",
-      "Values": ["EXPENSIVE_RENDERING", ""],
+      "Values": [
+        "EXPENSIVE_RENDERING",
+        ""
+      ],
       "Type": "Property"
     }
   ],
@@ -329,14 +335,14 @@
     {
       "PowerHint": "INTERACTION",
       "Node": "CPUEfficiencyClusterMinFreq",
-      "Duration": 0,
-      "Value": "1450000"
+      "Duration": 380,
+      "Value": "1700000"
     },
     {
       "PowerHint": "INTERACTION",
       "Node": "CPUSuperClusterMinFreq",
-      "Duration": 0,
-      "Value": "1621000"
+      "Duration": 380,
+      "Value": "2000000"
     },
     {
       "PowerHint": "INTERACTION",
@@ -353,67 +359,61 @@
     {
       "PowerHint": "INTERACTION",
       "Node": "UclampTAMin",
-      "Duration": 0,
+      "Duration": 380,
       "Value": "40"
     },
     {
       "PowerHint": "INTERACTION",
       "Node": "UclampTALatency",
-      "Duration": 0,
+      "Duration": 380,
       "Value": "1"
     },
     {
       "PowerHint": "INTERACTION",
       "Node": "MemFreq",
-      "Duration": 0,
-      "Value": "3600000000"
-    },
-    {
-      "PowerHint": "INTERACTION",
-      "Node": "GpuPwrLevel",
-      "Duration": 0,
-      "Value": "0"
+      "Duration": 380,
+      "Value": "2400000000"
     },
     {
       "PowerHint": "INTERACTION",
       "Node": "GPUDVFSInterval",
-      "Duration": 0,
+      "Duration": 380,
       "Value": "50"
     },
     {
       "PowerHint": "INTERACTIVE",
       "Node": "CPUEfficiencyClusterMinFreq",
-      "Duration": 800,
+      "Duration": 380,
       "Value": "1700000"
     },
     {
       "PowerHint": "INTERACTIVE",
       "Node": "CPUSuperClusterMinFreq",
-      "Duration": 800,
+      "Duration": 380,
       "Value": "2000000"
     },
     {
       "PowerHint": "INTERACTIVE",
       "Node": "MemFreq",
-      "Duration": 800,
-      "Value": "3600000000"
+      "Duration": 380,
+      "Value": "2400000000"
     },
     {
       "PowerHint": "INTERACTIVE",
-      "Node": "GpuPwrLevel",
-      "Duration": 800,
-      "Value": "0"
+      "Node": "GPUDVFSInterval",
+      "Duration": 380,
+      "Value": "50"
     },
     {
       "PowerHint": "INTERACTIVE",
       "Node": "UclampTAMin",
-      "Duration": 800,
+      "Duration": 380,
       "Value": "40"
     },
     {
       "PowerHint": "INTERACTIVE",
       "Node": "UclampTALatency",
-      "Duration": 800,
+      "Duration": 380,
       "Value": "1"
     },
     {
@@ -469,6 +469,18 @@
       "Node": "UclampTAMin",
       "Duration": 0,
       "Value": "40"
+    },
+    {
+      "PowerHint": "INTERACTION",
+      "Node": "GpuPwrLevel",
+      "Duration": 380,
+      "Value": "0"
+    },
+    {
+      "PowerHint": "INTERACTIVE",
+      "Node": "GpuPwrLevel",
+      "Duration": 380,
+      "Value": "0"
     }
   ],
   "AdpfConfig": [
